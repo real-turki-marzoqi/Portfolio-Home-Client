@@ -1,0 +1,22 @@
+.footer {
+  background-color: #151d42;
+  display: flex;
+  justify-content: left;
+  padding-left: 10px;
+  height: 100%;
+  color: aliceblue;
+  width: 100%;
+}
+
+.footer-Row {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
+}
+.Footer-Email {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}

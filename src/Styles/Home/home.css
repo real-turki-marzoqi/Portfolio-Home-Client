@@ -1,0 +1,26 @@
+.Main-texts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  padding-top: 20%;
+  transition: transform 0.3s ease-in-out;
+}
+.home-main {
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #151d42;
+  border-radius: 400px 0 250px 20px;
+  border: 2px solid #c4a0a1; /* تحديد العرض والنمط للحدود */
+  color: #f8f7f4;
+  width: 100%;
+  box-shadow: 5px 5px 10px #0f0f0f; /* دمج القيم لتأثير الظل */
+}
+
+.Main-texts:hover {
+  transform: scale(1.1);
+  color: #e4405f;
+}

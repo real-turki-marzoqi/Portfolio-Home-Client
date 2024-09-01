@@ -1,0 +1,33 @@
+.contact-form {
+  border: solid 2px black;
+  padding: 10px;
+  width: 80%;
+  margin-bottom: 1%;
+  justify-content: space-around;
+  align-items: center;
+}
+.contact-main-form {
+  border-top: 2px solid black;
+  align-items: center;
+}
+.contact-input {
+  width: 90%;
+  margin-top: 2%;
+}
+.contact-send {
+  width: 100px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  background-color: #151d42;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0px 10px 20px rgba(132, 98, 98, 0.3);
+}
+.Contact-color-icon {
+  color: whitesmoke;
+}
+
+.contact-send:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: #313857;
+}

@@ -1,0 +1,19 @@
+.profile-Image {
+  border-bottom: 2px solid #c4a0a1;
+  margin-left: 50%;
+  transition: transform 0.3s ease-in-out;
+}
+.image-container {
+  background-color: #c4a0a1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  border: 2px solid #c4a0a1;
+  padding: 10px;
+  border-radius: 60% 0 80% 3%;
+  width: 50%;
+}
+.profile-Image:hover {
+  transform: scale(1.1);
+}

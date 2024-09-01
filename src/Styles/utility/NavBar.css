@@ -1,0 +1,15 @@
+.NavBar {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  text-align: left;
+
+  width: 100%;
+  font-size: x-large;
+  border-bottom: 2px solid #c4a0a1;
+}
+
+.NavBar-Logo {
+  margin-left: 5%;
+  color: #151d42;
+}

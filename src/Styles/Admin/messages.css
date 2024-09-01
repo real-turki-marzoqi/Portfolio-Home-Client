@@ -1,0 +1,51 @@
+.main-title{
+    background-color: #151d42;
+    color: white;
+}
+
+.messageContent-Container{
+
+    border: solid 3px black;
+}
+
+.first-row{
+
+    background-color: #cdc2a5a2;
+}
+.second-row{
+    background-color:#cdc2a591;
+}
+.message-title{
+
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    color: rgb(14, 16, 17) !important;
+    background-color: #5F6F65;
+}
+.other{
+
+    border: solid 1px rgb(12, 12, 14);
+}
+.msg-btn{
+    color:  #e4405f;
+    transition: transform 0.3s ease-in-out;
+    
+}
+
+.msg-delete-row{
+
+    background-color: #808D7C;
+    display: flex;
+   
+  
+    text-align: right;
+    margin-bottom: 20px;
+    flex-direction: column;
+}
+.msg-btn:hover{
+    cursor: pointer;
+    transform: scale(1.5);
+}

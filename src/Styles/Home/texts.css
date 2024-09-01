@@ -1,0 +1,9 @@
+
+
+.texts {
+  border: 1px solid black;
+  width: 100px;
+  margin-bottom: 2%;
+  border-radius: 20px;
+  background-color: rgba(43, 40, 53, 0.164);
+}
