@@ -10,6 +10,7 @@ const admin = () => {
   return (
     <Container className="admin-main">
       <div>
+        <h1>Admin</h1>
         <Row>
           <Col xl={2} lg={2} md={2} sm={3} xs={3}>
             <SideBar />

@@ -6,26 +6,32 @@ import Spinner from "react-bootstrap/Spinner";
 // Components Imports
 import imageim from "../images/imageim.png";
 import SocialMedia from "../components/Home/SocialMedia";
-import AboutMe from '../components/Home/AboutMe'
-import Education from '../components/Home/education'
-import Services from '../components/Home/Services'
+import AboutMe from "../components/Home/AboutMe";
+import Education from "../components/Home/education";
+import Services from "../components/Home/Services";
 import ContactWithMe from "../components/Home/ContactWithMe";
 import Footer from "../components/Footer";
 
-
 // Personal Info Redux And Selectors Imports
-import { selectPersonalInfo, selectPersonalInfoStatus, selectPersonalInfoError,selectUpdatePersonalInfoStatus} from "../redux/features/personalInformations/personalInfoSelectors";
+import {
+  selectPersonalInfo,
+  selectPersonalInfoStatus,
+  selectPersonalInfoError,
+  selectUpdatePersonalInfoStatus,
+} from "../redux/features/personalInformations/personalInfoSelectors";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { getPersonalInfo } from "../redux/features/personalInformations/personalInfoThunk";
 
 // Texts Redux And Selectors Imports
-import {getTexts} from '../redux/features/texts/textsThunk'
-import {selectTexts , selectTextErrors , selectTextsStatus} from '../redux/features/texts/textsSelector'
-
+import { getTexts } from "../redux/features/texts/textsThunk";
+import {
+  selectTexts,
+  selectTextErrors,
+  selectTextsStatus,
+} from "../redux/features/texts/textsSelector";
 
 const Home = () => {
-
   const [personalInfoLocalState, setPersonalInfoLocalState] = useState({
     name: "",
     email: "",
@@ -35,50 +41,48 @@ const Home = () => {
   const dispatch = useDispatch();
   const personalInfo = useSelector(selectPersonalInfo);
   const status = useSelector(selectPersonalInfoStatus);
-  const error = useSelector(selectPersonalInfoError)
+  const error = useSelector(selectPersonalInfoError);
 
-  const [texts , setTexts] = useState({
-    AboutMe:'' ,Education:"" , Services:''})
-  const getTextsData = useSelector(selectTexts)
-  const getTextsStatus = useSelector(selectTextsStatus)
-  const getTextsErrors = useSelector(selectTextErrors)
+  const [texts, setTexts] = useState({
+    AboutMe: "",
+    Education: "",
+    Services: "",
+  });
+  const getTextsData = useSelector(selectTexts);
+  const getTextsStatus = useSelector(selectTextsStatus);
+  const getTextsErrors = useSelector(selectTextErrors);
 
-  
-  const handleError ='Loading Home Page failed'
+  const handleError = "Loading Home Page failed";
 
   useEffect(() => {
-    if (status === "idle" && getTextsStatus === 'idle') {
+    if (status === "idle" && getTextsStatus === "idle") {
       dispatch(getPersonalInfo());
       dispatch(getTexts());
     }
-  }, [getTextsStatus,status, dispatch]);
-
+  }, [getTextsStatus, status, dispatch]);
 
   useEffect(() => {
-    if (status === "succeeded" && getTextsStatus ===  'succeeded') {
-      
-
-      if (Array.isArray(personalInfo) && personalInfo.length > 0 && Array.isArray(getTextsData) && getTextsData.length > 0) {
+    if (status === "succeeded" && getTextsStatus === "succeeded") {
+      if (
+        Array.isArray(personalInfo) &&
+        personalInfo.length > 0 &&
+        Array.isArray(getTextsData) &&
+        getTextsData.length > 0
+      ) {
         setPersonalInfoLocalState({
           name: personalInfo[0].name || "",
           email: personalInfo[0].email || "",
           number: personalInfo[0].number || "",
         });
 
-        
         setTexts({
-          AboutMe:getTextsData[0].AboutMe,
-          Education:getTextsData[0].Education,
-          Services:getTextsData[0].Services
-        })
-
+          AboutMe: getTextsData[0].AboutMe,
+          Education: getTextsData[0].Education,
+          Services: getTextsData[0].Services,
+        });
       }
-     
     }
   }, [status, personalInfo]);
-
-
-
 
   if (status === "loading")
     return (
@@ -100,7 +104,7 @@ const Home = () => {
         <div className="home-main">
           {/* #==START PROFILE IMAGE==# */}
           <Row className="image-main">
-            <Col className="" xl={7} lg={7} md={7} sm={8} xs={8}>
+            <Col className="" xl={7} lg={7} md={7} sm={6} xs={6}>
               <div className="image-container">
                 <img
                   className="profile-Image"
@@ -130,18 +134,18 @@ const Home = () => {
 
           {/* #== START TEXTS ==# */}
         </div>
-        <Row style={{ marginTop: "2%" }}>
+        <Row style={{ paddingTop: "5%" , width:'100%'}}>
           <Col xl={6} lg={6} md={6} sm={12} xs={12} className="texts">
             <AboutMe AboutMe={texts.AboutMe}></AboutMe>
           </Col>
         </Row>
-        <Row className="texts-main-row">
+        <Row  style={{ paddingTop: "5%" , width:'100%'}} className="texts-main-row">
           <Col xl={6} lg={6} md={6} sm={12} xs={12} className=""></Col>
           <Col xl={6} lg={6} md={6} sm={12} xs={12} className="texts">
             <Education Education={texts.Education} />
           </Col>
         </Row>
-        <Row style={{ marginTop: "2%" }}>
+        <Row style={{ paddingTop: "5%" , width:'100%'}}>
           <Col xl={6} lg={6} md={6} sm={12} xs={12} className="texts">
             <Services Services={texts.Services}></Services>
           </Col>
