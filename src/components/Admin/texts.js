@@ -53,15 +53,16 @@ const Texts = () => {
   useEffect(() => {
     if (
       getTextsStatus === "succeeded" &&
-      Array.isArray(getTextsData) &&
-      getTextsData.length > 0
+      Array.isArray(getTextsData.data) &&
+      getTextsData.data.length > 0
     ) {
       setLocalTexts({
-        id: getTextsData[0]._id,
-        aboutMe: getTextsData[0].AboutMe || "",
-        services: getTextsData[0].Services || "",
-        education: getTextsData[0].Education || "",
+        id: getTextsData.data[0]._id,
+        aboutMe: getTextsData.data[0].AboutMe || "",
+        services: getTextsData.data[0].Services || "",
+        education: getTextsData.data[0].Education || "",
       });
+      console.log(getTextsData.data[0].AboutMe);
     }
   }, [getTextsStatus, getTextsData]);
   // !-- end FETCH TEXTS DATA --!
@@ -89,10 +90,10 @@ const Texts = () => {
   const handleCloseUpdateModal = () => {
     if (Array.isArray(getTextsData) && getTextsData.length > 0) {
       setLocalTexts({
-        id: getTextsData[0]._id,
-        aboutMe: getTextsData[0].AboutMe || "",
-        services: getTextsData[0].Services || "",
-        education: getTextsData[0].Education || "",
+        id: getTextsData.data[0]._id,
+        aboutMe: getTextsData.data[0].AboutMe || "",
+        services: getTextsData.data[0].Services || "",
+        education: getTextsData.data[0].Education || "",
       });
     }
     setShowUpdateModal(false);

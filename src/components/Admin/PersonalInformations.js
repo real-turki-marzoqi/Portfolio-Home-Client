@@ -31,8 +31,8 @@ import imageim from "../../images/imageim.png";
 
 const PersonalInformations = () => {
   // #== Start LOCAL STATE ==#
-  const [personalInfoLocalState, setPersonalInfoLocalState] = useState({
-    id: "",
+  const [localPersonalInfo, setLocalPersonalInfo] = useState({
+    id: null,
     name: "",
     email: "",
     number: "",
@@ -63,14 +63,14 @@ const PersonalInformations = () => {
   useEffect(() => {
     if (
       getPersonalInfoStatus === "succeeded" &&
-      Array.isArray(getPersonalinfoData) &&
-      getPersonalinfoData.length > 0
+      Array.isArray(getPersonalinfoData.data) &&
+      getPersonalinfoData.data.length > 0
     ) {
-      setPersonalInfoLocalState({
-        id: getPersonalinfoData[0]._id || "",
-        name: getPersonalinfoData[0].name || "",
-        email: getPersonalinfoData[0].email || "",
-        number: getPersonalinfoData[0].number || "",
+      setLocalPersonalInfo({
+        id: getPersonalinfoData.data[0]._id || "",
+        name: getPersonalinfoData.data[0].name || "",
+        email: getPersonalinfoData.data[0].email || "",
+        number: getPersonalinfoData.data[0].number || "",
       });
 
       // Show success alert and hide it after 3 seconds
@@ -99,9 +99,9 @@ const PersonalInformations = () => {
 
   const handleShowUpdateModel = () => {
     setUpdatedLoacalPersonalInfo({
-      localName: personalInfoLocalState.name,
-      localEmail: personalInfoLocalState.email,
-      localNumber: personalInfoLocalState.number,
+      localName: localPersonalInfo.name,
+      localEmail: localPersonalInfo.email,
+      localNumber: localPersonalInfo.number,
     });
 
     setShowUpdateInformationModal(true);
@@ -117,7 +117,6 @@ const PersonalInformations = () => {
     }
 
     const updatedPersonalInfoData = {
-      id: personalInfoLocalState.id,
       name: localName,
       email: localEmail,
       number: localNumber,
@@ -126,7 +125,7 @@ const PersonalInformations = () => {
     try {
       await dispatch(
         putNewPersonalInfo({
-          id: personalInfoLocalState.id,
+          id: localPersonalInfo.id,
           data: updatedPersonalInfoData,
         })
       ).unwrap();
@@ -138,24 +137,6 @@ const PersonalInformations = () => {
     dispatch(getPersonalInfo());
   };
   // #!-- end UPDATE INFORMATION MODAL STATE --!
-
-  // #== Start CONDITIONAL RENDERING BASED ON FETCH STATUS ==#
-  if (getPersonalInfoStatus === "loading") {
-    return (
-      <div style={{ padding: "20PX" }}>
-        Loading... <Spinner animation="grow" variant="dark" />
-      </div>
-    );
-  }
-
-  if (getPersonalInfoStatus === "failed") {
-    return (
-      <div>
-        <Alert variant={"danger"}>Error: {getPersonalInfoErrors} </Alert>
-      </div>
-    );
-  }
-  // #!-- end CONDITIONAL RENDERING BASED ON FETCH STATUS --!
 
   // #== Start RENDERING PERSONAL INFORMATION COMPONENT ==#
   return (
@@ -189,9 +170,9 @@ const PersonalInformations = () => {
           </Col>
           <Col className="informations-text" xl={8} lg={8} md={8} sm={8} xs={8}>
             <Row>
-              <h4>Name: {personalInfoLocalState.name}</h4>
-              <h4>Email: {personalInfoLocalState.email}</h4>
-              <h4>Phone Number: {personalInfoLocalState.number}</h4>
+              <h4>Name: {localPersonalInfo.name}</h4>
+              <h4>Email: {localPersonalInfo.email}</h4>
+              <h4>Phone Number: {localPersonalInfo.number}</h4>
             </Row>
             <Row>
               <Col xl={6} lg={6} md={6} sm={6} xs={6}>

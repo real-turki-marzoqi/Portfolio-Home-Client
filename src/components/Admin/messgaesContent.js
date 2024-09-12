@@ -1,12 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { selectDeleteMessagesErrors, selectDeleteMessagesStatus } from "../../redux/features/messages/messagesSelectors";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import {
+  selectDeleteMessagesErrors,
+  selectDeleteMessagesStatus,
+} from "../../redux/features/messages/messagesSelectors";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteMessageThunk } from '../../redux/features/messages/messagesThunk';
+import { deleteMessageThunk } from "../../redux/features/messages/messagesThunk";
 import showToast from "../costumToast";
 import { ToastContainer } from "react-toastify";
+
+import moment from "moment";
 
 const MessagesContent = ({ messages, onMessageDeleted }) => {
   const [showDeleteMessageModal, setShowDeleteMessageModal] = useState(false);
@@ -15,23 +20,10 @@ const MessagesContent = ({ messages, onMessageDeleted }) => {
   const deleteMessagesErrors = useSelector(selectDeleteMessagesErrors);
   const deleteMessagesStatus = useSelector(selectDeleteMessagesStatus);
 
-  useEffect(() => {
-    if (deleteMessagesStatus === 'succeeded') {
-     
-      setShowDeleteMessageModal(false);
-      setSelectedMessage(null);
-      if (selectedMessage) {
-        onMessageDeleted(selectedMessage._id); // Notify parent component about the deletion
-      }
-    } else if (deleteMessagesStatus === 'failed') {
-      showToast('error', 'Message delete failed', deleteMessagesErrors);
-    }
-  }, [deleteMessagesStatus, deleteMessagesErrors, selectedMessage, onMessageDeleted]);
-
-  const handleCloseDeleteMessageModal = () => {
+  const handleCloseDeleteMessageModal = useCallback(() => {
     setShowDeleteMessageModal(false);
     setSelectedMessage(null);
-  };
+  }, []);
 
   const handleShowDeleteMessageModal = (message) => {
     setSelectedMessage(message);
@@ -40,10 +32,26 @@ const MessagesContent = ({ messages, onMessageDeleted }) => {
 
   const handleDeleteMessage = async () => {
     if (selectedMessage) {
-      await dispatch(deleteMessageThunk(selectedMessage._id));
-      showToast('success', 'Message deleted successfully');
+      try {
+        await dispatch(deleteMessageThunk(selectedMessage._id));
+        showToast("success", "Message deleted successfully");
+        handleCloseDeleteMessageModal(); // Close modal after successful deletion
+        onMessageDeleted(selectedMessage._id); // Notify parent component about the deletion
+      } catch (error) {
+        showToast("error", "Message delete failed", deleteMessagesErrors);
+      }
     }
   };
+
+  useEffect(() => {
+    if (deleteMessagesStatus === "succeeded") {
+      handleCloseDeleteMessageModal(); // Close modal after successful deletion
+    }
+  }, [
+    deleteMessagesStatus,
+    deleteMessagesErrors,
+    handleCloseDeleteMessageModal,
+  ]);
 
   return (
     <Container className="messageContent-Container">
@@ -71,13 +79,15 @@ const MessagesContent = ({ messages, onMessageDeleted }) => {
 
             <Row className="second-row other">
               <Col xl={12} lg={12} md={12} sm={12} xs={12}>
-                Message Content: {message.content}
+                Message Content: {message.messageContent}
               </Col>
             </Row>
 
             <Row className="other msg-delete-row">
               <Col xl={12} lg={12} md={12} sm={12} xs={12}>
-                <p>Date: {message.createdDate}</p>
+                <p>
+                  Date: {moment(message.createdDate).format("YYYY-MM-DD HH:mm")}
+                </p>
                 <i
                   onClick={() => handleShowDeleteMessageModal(message)}
                   className="fa-solid fa-delete-left msg-btn"
@@ -95,7 +105,10 @@ const MessagesContent = ({ messages, onMessageDeleted }) => {
       )}
 
       {selectedMessage && (
-        <Modal show={showDeleteMessageModal} onHide={handleCloseDeleteMessageModal}>
+        <Modal
+          show={showDeleteMessageModal}
+          onHide={handleCloseDeleteMessageModal}
+        >
           <Modal.Header closeButton>
             <Modal.Title>Delete Message: {selectedMessage.title}</Modal.Title>
           </Modal.Header>

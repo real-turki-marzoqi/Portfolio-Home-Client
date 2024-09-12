@@ -4,7 +4,7 @@ import {
   selectGetMessages,
   selectGetMessagesStatus,
   selectGetMessagesErrors,
-  selectDeleteMessagesStatus
+  selectDeleteMessagesStatus,
 } from "../../redux/features/messages/messagesSelectors";
 import { getMessagesThunk } from "../../redux/features/messages/messagesThunk";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,22 +27,34 @@ const Messages = () => {
   }, [dispatch, getMessagesStatus]);
 
   useEffect(() => {
-    if (getMessagesStatus === "succeeded" && Array.isArray(getMessagesData)) {
-      setLocalMessages(getMessagesData);
+    if (
+      getMessagesStatus === "succeeded" &&
+      Array.isArray(getMessagesData.data)
+    ) {
+      setLocalMessages(getMessagesData.data);
     }
   }, [getMessagesData, getMessagesStatus]);
 
-  // Refetch messages when a delete operation succeeds
   useEffect(() => {
-    if (deleteMessagesStatus === 'succeeded') {
+    if (deleteMessagesStatus === "succeeded") {
       dispatch(getMessagesThunk()); // Refetch messages to update local state
     }
   }, [deleteMessagesStatus, dispatch]);
 
-  // Update local messages after a message is deleted
   const handleMessageDeleted = (deletedMessageId) => {
-    setLocalMessages(localMessages.filter(message => message._id !== deletedMessageId));
+    setLocalMessages(
+      localMessages.filter((message) => message._id !== deletedMessageId)
+    );
   };
+
+  // Render loading or error states if necessary
+  if (getMessagesStatus === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (getMessagesStatus === "failed") {
+    return <div>Error: {getMessagesErrors}</div>;
+  }
 
   return (
     <Container>
@@ -51,8 +63,8 @@ const Messages = () => {
       </Row>
 
       <Row>
-        <MessagesContent 
-          messages={localMessages} 
+        <MessagesContent
+          messages={localMessages}
           onMessageDeleted={handleMessageDeleted}
         />
       </Row>

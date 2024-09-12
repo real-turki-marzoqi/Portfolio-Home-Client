@@ -2,7 +2,7 @@ import API from "../../API/api";
 
 export const fetchTexts = async () => {
   try {
-    const response = await API.get("home/texts/");
+    const response = await API.get("/api/v1/texts");
 
     if (response.status === 200) {
       return response.data;
@@ -23,7 +23,7 @@ export const UpdateTexts = async (id, data) => {
   }
 
   try {
-    const response = await API.put(`admin/texts/${id}`, data);
+    const response = await API.put(`/api/v1/texts/${id}`, data);
 
     if (response.status >= 200 && response.status < 300) {
       return response.data;

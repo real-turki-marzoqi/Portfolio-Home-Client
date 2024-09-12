@@ -2,7 +2,7 @@ import API from "../../API/api";
 
 export const getMessages = async () => {
   try {
-    const response = await API.get("admin/contact");
+    const response = await API.get("/api/v1/messages");
     if (response.status === 200) {
       return response.data;
     } else {
@@ -17,26 +17,28 @@ export const getMessages = async () => {
 
 export const deleteMessage = async (id) => {
   try {
-    const response = await API.delete(`admin/contact/${id}`);
+    const response = await API.delete(`/api/v1/messages/${id}`);
 
-    if (response.status === 200) {
-      return response.data;
+    if (response.status === 204) {
+      // لا يوجد محتوى مطلوب عند الحذف الناجح
+      return; // لا حاجة لإرجاع أي بيانات
     }
 
     console.error(`Error: Unexpected response status ${response.status}`);
     throw new Error(`Unexpected response status: ${response.status}`);
-    
   } catch (error) {
-    console.error("Error: Deleting Message", error);
+    // التعامل مع الأخطاء وتوفير معلومات دقيقة
+    console.error("Error: Deleting Message", error.message);
     throw new Error(`Failed to delete message with ID ${id}: ${error.message}`);
   }
 };
 
 
 
+
 export const addMessage = async (data) => {
   try {
-    const response = await API.post('home/contact', data);
+    const response = await API.post('/api/v1/messages', data);
 
     switch (response.status) {
       case 200: // الطلب تم بنجاح ولكن هذا ليس الشائع لطلبات POST

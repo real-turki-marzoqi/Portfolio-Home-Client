@@ -55,34 +55,33 @@ const Home = () => {
   const handleError = "Loading Home Page failed";
 
   useEffect(() => {
-    if (status === "idle" && getTextsStatus === "idle") {
+    if (status === "idle") {
       dispatch(getPersonalInfo());
+    }
+    if (getTextsStatus === "idle") {
       dispatch(getTexts());
     }
-  }, [getTextsStatus, status, dispatch]);
+  }, [status, getTextsStatus, dispatch]);
+  
 
   useEffect(() => {
     if (status === "succeeded" && getTextsStatus === "succeeded") {
-      if (
-        Array.isArray(personalInfo) &&
-        personalInfo.length > 0 &&
-        Array.isArray(getTextsData) &&
-        getTextsData.length > 0
-      ) {
+      if (personalInfo.data?.length > 0 && getTextsData.data?.length > 0) {
         setPersonalInfoLocalState({
-          name: personalInfo[0].name || "",
-          email: personalInfo[0].email || "",
-          number: personalInfo[0].number || "",
+          name: personalInfo.data[0].name || "",
+          email: personalInfo.data[0].email || "",
+          number: personalInfo.data[0].number || "",
         });
-
+  
         setTexts({
-          AboutMe: getTextsData[0].AboutMe,
-          Education: getTextsData[0].Education,
-          Services: getTextsData[0].Services,
+          AboutMe: getTextsData.data[0].AboutMe,
+          Education: getTextsData.data[0].Education,
+          Services: getTextsData.data[0].Services,
         });
       }
     }
-  }, [status, personalInfo]);
+  }, [status, personalInfo, getTextsStatus, getTextsData]);
+  
 
   if (status === "loading")
     return (
@@ -97,6 +96,16 @@ const Home = () => {
         <Alert variant={"danger"}>Error:{error || handleError} </Alert>
       </div>
     );
+
+    if (getTextsStatus === "failed")
+      return (
+        <div>
+          <Alert variant={"danger"}>
+            Error in texts: {getTextsErrors || handleError}
+          </Alert>
+        </div>
+      );
+    
 
   return (
     <>
