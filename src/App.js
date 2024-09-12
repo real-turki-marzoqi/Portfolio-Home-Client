@@ -15,7 +15,6 @@ import './Styles/Admin/messages.css'
 
 // Utility Components and Styles Imports
 import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
 import "./Styles/utility/Footer.css";
 import "./Styles/utility/NavBar.css";
 
