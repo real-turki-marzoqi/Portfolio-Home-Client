@@ -17,7 +17,6 @@ import {
   selectPersonalInfo,
   selectPersonalInfoStatus,
   selectPersonalInfoError,
-  selectUpdatePersonalInfoStatus,
 } from "../redux/features/personalInformations/personalInfoSelectors";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -143,18 +142,18 @@ const Home = () => {
 
           {/* #== START TEXTS ==# */}
         </div>
-        <Row style={{ paddingTop: "5%" , width:'100%'}}>
+        <Row style={{ marginLeft:"1%", paddingTop: "5%" , width:'100%'}}>
           <Col xl={6} lg={6} md={6} sm={12} xs={12} className="texts">
             <AboutMe AboutMe={texts.AboutMe}></AboutMe>
           </Col>
         </Row>
-        <Row  style={{ paddingTop: "5%" , width:'100%'}} className="texts-main-row">
+        <Row  style={{marginLeft:"1%", paddingTop: "5%" , width:'100%'}} className="texts-main-row">
           <Col xl={6} lg={6} md={6} sm={12} xs={12} className=""></Col>
           <Col xl={6} lg={6} md={6} sm={12} xs={12} className="texts">
             <Education Education={texts.Education} />
           </Col>
         </Row>
-        <Row style={{ paddingTop: "5%" , width:'100%'}}>
+        <Row style={{marginLeft:"1%", paddingTop: "5%" , width:'100%'}}>
           <Col xl={6} lg={6} md={6} sm={12} xs={12} className="texts">
             <Services Services={texts.Services}></Services>
           </Col>
@@ -163,7 +162,7 @@ const Home = () => {
 
         {/* #== START Contact With Me  ==# */}
         <Row className="contact-main-form">
-          <Col xl={9} lg={9} md={9} sm={9} xs={9}>
+          <Col xl={9} lg={9} md={9} sm={12} xs={12}>
             <ContactWithMe></ContactWithMe>
           </Col>
         </Row>
