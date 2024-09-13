@@ -5,7 +5,7 @@ const Services = ({ Services }) => {
         Services <i className="fa-solid fa-gears"></i>
       </h1>
 
-      <h5>{Services}</h5>
+      <h5 className="textsCo">{Services}</h5>
     </div>
   );
 };

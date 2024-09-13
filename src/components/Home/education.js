@@ -5,7 +5,7 @@ const Education = ({ Education }) => {
         Edecutions <i className="fa-solid fa-user-graduate"></i>
       </h1>
 
-      <h5>{Education}</h5>
+      <h5 className="textsCo">{Education}</h5>
     </div>
   );
 };
