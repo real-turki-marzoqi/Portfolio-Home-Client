@@ -11,6 +11,11 @@ import Home from "./Pages/Home";
 import NavBar from "./components/NavBar";
 import "./Styles/utility/Footer.css";
 import "./Styles/utility/NavBar.css";
+import './Styles/Home/messagesStyle.css';
+
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 
 // ROUTER

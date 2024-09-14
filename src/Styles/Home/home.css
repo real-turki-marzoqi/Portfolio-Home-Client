@@ -5,7 +5,49 @@
   text-align: left;
   padding-top: 20%;
   transition: transform 0.3s ease-in-out;
+  font-size: 1.5rem; /* حجم النص متجاوب */
+
 }
+
+/* للشاشات الصغيرة (الهواتف) */
+@media (max-width: 600px) {
+  .Main-texts {
+    padding-top: 10%;
+    font-size: 1.2rem; /* تقليل حجم النص على الشاشات الصغيرة */
+  }
+
+  .home-main {
+    border-radius: 200px 0 150px 10px; /* تقليل انحناء الحدود للشاشات الصغيرة */
+    padding: 10px; /* تقليل الحواف الداخلية */
+  }
+}
+
+/* للشاشات المتوسطة (التابلت) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .Main-texts {
+    padding-top: 15%;
+    font-size: 1.4rem; 
+  }
+
+  .home-main {
+    border-radius: 300px 0 200px 15px; 
+    padding: 20px;
+  }
+}
+
+
+@media (min-width: 1025px) {
+  .Main-texts {
+    padding-top: 20%;
+    font-size: 1.7rem; 
+  }
+
+  .home-main {
+    border-radius: 400px 0 250px 20px;
+    padding: 30px; /* زيادة الحواف الداخلية */
+  }
+}
+
 .home-main {
   margin-top: 2%;
   display: flex;
@@ -14,13 +56,61 @@
   text-align: center;
   background-color: #151d42;
   border-radius: 400px 0 250px 20px;
-  border: 2px solid #c4a0a1; /* تحديد العرض والنمط للحدود */
+  border: 2px solid #c4a0a1;
   color: #f8f7f4;
-
-  box-shadow: 5px 5px 10px #0f0f0f; /* دمج القيم لتأثير الظل */
+  box-shadow: 5px 5px 10px #0f0f0f;
+  padding: 20px; /* إضافة padding للحواف الداخلية */
 }
 
 .Main-texts:hover {
   transform: scale(1.1);
   color: #e4405f;
 }
+
+/* تأكيد التفاعل عند مرور المؤشر على <h1> */
+.Main-texts h1 {
+  font-size: 2.5rem; /* الحجم الافتراضي */
+  color: #827f7f;
+  transition: transform 0.3s ease, color 0.3s ease; /* إضافة تأثيرات التفاعل */
+  text-align: center;
+}
+
+.Main-texts h1:hover {
+  transform: scale(1.05); /* تكبير الحجم قليلاً عند مرور المؤشر */
+  
+}
+
+/* تأكيد التفاعل عند مرور المؤشر على <h6> */
+.Main-texts h6 {
+  font-size: 1.25rem; /* الحجم الافتراضي */
+ 
+  transition: color 0.3s ease; /* إضافة تأثير تغيير اللون */
+  text-align: center;
+}
+
+.Main-texts h6:hover {
+  color: #f40a5c; /* تغيير اللون عند مرور المؤشر */
+}
+
+/* للشاشات الصغيرة (الهاتف) */
+@media (max-width: 600px) {
+  .Main-texts h1 {
+    font-size: 1.75rem; /* تصغير حجم <h1> للشاشات الصغيرة */
+  }
+
+  .Main-texts h6 {
+    font-size: 1rem; /* تصغير حجم <h6> للشاشات الصغيرة */
+  }
+}
+
+/* للشاشات المتوسطة (تابلت) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .Main-texts h1 {
+    font-size: 2rem; /* تصغير حجم <h1> قليلاً للشاشات المتوسطة */
+  }
+
+  .Main-texts h6 {
+    font-size: 1.15rem; /* تصغير حجم <h6> قليلاً للشاشات المتوسطة */
+  }
+}
+

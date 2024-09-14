@@ -16,12 +16,20 @@ const ContactWithMe = () => {
     localTitle: "",
     localContent: "",
   });
+  
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const addMessageStatus = useSelector(selectAddMessagesStatus);
   const addMessageErrors = useSelector(selectAddMessagesErrors);
 
   useEffect(() => {
+    if (addMessageStatus === "loading") {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+
     if (addMessageStatus === "succeeded") {
       setLocalContact({
         localName: "",
@@ -32,10 +40,10 @@ const ContactWithMe = () => {
 
       showToast(
         "success",
-        "Message sent successfully Thank you for reaching out. I will review your message and respond to you as soon as possible."
+        "Message sent successfully. Thank you for reaching out. I will review your message and respond as soon as possible."
       );
     } else if (addMessageStatus === "failed") {
-      showToast("error", addMessageErrors || "Failed to add message");
+      showToast("error", addMessageErrors || "Failed to add message.");
     }
   }, [addMessageStatus, addMessageErrors]);
 
@@ -44,25 +52,41 @@ const ContactWithMe = () => {
     return !/<script|<\/script>/i.test(message);
   };
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
   const handleSendMessage = (e) => {
     e.preventDefault();
 
     const { localName, localEmail, localTitle, localContent } = localContact;
 
-    if (!localName || !localEmail || !localTitle || !localContent) {
+    // التحقق من أن جميع الحقول مليئة
+    const isFormValid = Object.values(localContact).every(field => field.trim() !== "");
+    if (!isFormValid) {
       showToast("warn", "All fields are required");
       return;
     }
 
+    // التحقق من صحة البريد الإلكتروني
+    if (!validateEmail(localEmail)) {
+      showToast("warn", "Invalid email format");
+      return;
+    }
+
     // تطهير المحتوى
+    const cleanName = DOMPurify.sanitize(localName);
+    const cleanEmail = DOMPurify.sanitize(localEmail);
+    const cleanTitle = DOMPurify.sanitize(localTitle);
     const cleanContent = DOMPurify.sanitize(localContent);
 
     if (validateMessage(cleanContent)) {
       dispatch(
         addMessageThunk({
-          SenderName: localName,
-          senderEmail: localEmail,
-          title: localTitle,
+          SenderName: cleanName,
+          senderEmail: cleanEmail,
+          title: cleanTitle,
           messageContent: cleanContent,
         })
       );
@@ -113,8 +137,8 @@ const ContactWithMe = () => {
             setLocalContact({ ...localContact, localContent: e.target.value })
           }
         />
-        <button type="submit" className="contact-send">
-          <i className="fa-solid fa-paper-plane Contact-color-icon"></i>
+        <button type="submit" className="contact-send" disabled={loading}>
+          {loading ? "Sending..." : <i className="fa-solid fa-paper-plane Contact-color-icon"></i>}
         </button>
       </form>
     </div>

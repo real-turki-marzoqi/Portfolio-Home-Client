@@ -129,7 +129,7 @@ const Home = () => {
                 {/* #==START NAME TEXT ==# */}
               </Row>
               <Row className="Main-texts">
-                <h1>
+                <h1 >
                   {" "}
                   <span style={{ color: "#f40a5c" }}>Hi</span> I'm{" "}
                   {personalInfoLocalState.name}!
@@ -142,7 +142,7 @@ const Home = () => {
 
           {/* #== START TEXTS ==# */}
         </div>
-        <Row style={{ marginLeft:"1%", paddingTop: "5%" , width:'100%'}}>
+        <Row style={{ marginLeft:"1%", paddingTop: "5%" }}>
           <Col xl={6} lg={6} md={6} sm={12} xs={12} className="texts">
             <AboutMe AboutMe={texts.AboutMe}></AboutMe>
           </Col>
