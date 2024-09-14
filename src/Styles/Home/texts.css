@@ -7,42 +7,64 @@
 }
 
 .textsCo {
-  font-size: 1.25rem; /* الحجم الافتراضي للنص */
+  font-size: 1.25rem;
   color: #333;
   text-align: center;
   line-height: 1.5;
   margin-bottom: 10px;
 }
 
-/* للشاشات الصغيرة (الهاتف) */
 @media (max-width: 600px) {
   .textsCo {
-    font-size: 0.8rem; /* حجم النص أصغر للشاشات الصغيرة */
+    font-size: 0.5rem;
   }
 
   .texts {
-    padding: 1rem; /* زيادة التباعد الداخلي لتفادي التصاق النصوص بالحواف */
+    padding: 0.8rem;
   }
 }
 
 /* للشاشات المتوسطة (تابلت) */
 @media (min-width: 601px) and (max-width: 1024px) {
   .textsCo {
-    font-size: 1.15rem; /* تعديل حجم النص ليكون مناسبًا للأجهزة المتوسطة */
+    font-size: 1rem;
   }
 
   .texts {
-    padding: 1.5rem; /* ضبط التباعد الداخلي ليتناسب مع الشاشة المتوسطة */
+    padding: 1.5rem;
   }
 }
 
-/* للشاشات الكبيرة (أجهزة الكمبيوتر المكتبية) */
 @media (min-width: 1025px) {
   .textsCo {
-    font-size: 1.5rem; /* تكبير النص للشاشات الكبيرة */
+    font-size: 1.2rem;
   }
 
   .texts {
-    padding: 2rem; /* زيادة التباعد الداخلي للشاشات الكبيرة */
+    padding: 2rem;
+  }
+}
+.titleTexts {
+  font-size: 2.5rem;
+  transition: font-size 0.3s ease-in-out;
+}
+
+/* للشاشات الصغيرة (الهواتف الذكية) */
+@media (max-width: 600px) {
+  .titleTexts {
+    font-size: 1rem;
+  }
+}
+
+/* للشاشات المتوسطة (التابلت) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .titleTexts {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .titleTexts {
+    font-size: 2.5rem;
   }
 }

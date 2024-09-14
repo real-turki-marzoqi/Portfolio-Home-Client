@@ -1,7 +1,7 @@
 const Education = ({ Education }) => {
   return (
     <div className="">
-      <h1>
+      <h1 className="titleTexts"> 
         Edecutions <i className="fa-solid fa-user-graduate"></i>
       </h1>
 

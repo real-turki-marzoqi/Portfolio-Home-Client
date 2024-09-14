@@ -1,7 +1,7 @@
 const AboutMe = ({ AboutMe }) => {
   return (
     <div className="">
-      <h1 >
+      <h1 className="titleTexts" >
         AboutMe <i className="fa-regular fa-file-lines"></i>
       </h1>
 

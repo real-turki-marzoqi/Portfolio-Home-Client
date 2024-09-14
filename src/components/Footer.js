@@ -6,7 +6,7 @@ const Footer = ({ name, email, number }) => {
     <div className="footer">
       <Row className="footer-Row">
         <Col xl={3} lg={3} md={3} sm={3} xs={3}>
-          <h6>All rights reserved by {name}©2024 </h6>
+          <h6 className="allRights" >All rights reserved by {name}©2024 </h6>
         </Col>
         <Col xl={9} lg={9} md={9} sm={9} xs={9}>
           <SocialMedia />

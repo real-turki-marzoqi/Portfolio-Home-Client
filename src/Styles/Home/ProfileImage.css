@@ -3,51 +3,48 @@
   margin-left: 50%;
   transition: transform 0.3s ease-in-out;
   margin-bottom: 10%;
-  width: 100%; /* جعل العرض 100% من الحاوية */
-  max-width: 350px; /* زيادة الحد الأقصى للعرض */
-  height: auto; /* الحفاظ على نسبة الأبعاد */
+  width: 100%;
+  max-width: 350px;
+  height: auto;
 }
 
-/* للشاشات الصغيرة (الهواتف) */
 @media (max-width: 600px) {
   .profile-Image {
-    margin-left: 0; /* إزالة الهامش الأيسر لتكون الصورة في المنتصف */
-    width: 100%; /* زيادة العرض على الشاشات الصغيرة */
-    margin-bottom: 7%; /* زيادة الهامش السفلي */
+    margin-left: 0;
+    width: 150%;
+    margin-bottom: 7%;
   }
 
   .image-container {
-    width: 95%; /* زيادة عرض الحاوية */
-    height: auto; /* جعل الطول يعتمد على المحتوى */
-    border-radius: 70% 0 90% 5%; /* تعديل انحناء الحدود ليتناسب مع الحجم الجديد */
+    width: 95%;
+    height: auto;
+    border-radius: 70% 0 90% 5%;
   }
 }
 
-/* للشاشات المتوسطة (تابلت) */
 @media (min-width: 601px) and (max-width: 1024px) {
   .profile-Image {
-    margin-left: 25%; /* تقليل الهامش الأيسر */
-    width: 95%; /* زيادة العرض للشاشات المتوسطة */
+    margin-left: 25%;
+    width: 100%;
   }
 
   .image-container {
-    width: 90%; /* زيادة عرض الحاوية */
-    height: 65%; /* زيادة الطول قليلاً */
-    border-radius: 65% 0 85% 4%; /* تعديل انحناء الحدود */
+    width: 90%;
+    height: 65%;
+    border-radius: 65% 0 85% 4%;
   }
 }
 
-/* للشاشات الكبيرة (أجهزة الكمبيوتر المكتبية) */
 @media (min-width: 1025px) {
   .profile-Image {
     margin-left: 50%;
-    max-width: 350px; /* الحفاظ على العرض الكبير للشاشات الكبيرة */
+    max-width: 350px;
   }
 
   .image-container {
-    width: 85%; /* زيادة عرض الحاوية للشاشات الكبيرة */
-    height: 75%; /* زيادة الطول قليلاً */
-    border-radius: 65% 0 85% 5%; /* تعديل انحناء الحدود ليتناسب مع الحجم الجديد */
+    width: 85%;
+    height: 75%;
+    border-radius: 65% 0 85% 5%;
   }
 }
 
@@ -56,7 +53,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70%; /* سيتم تعديله بناءً على الحجم الجديد */
+  height: 70%;
   border: 2px solid #c4a0a1;
   border-radius: 60% 0 80% 3%;
   width: 80%;

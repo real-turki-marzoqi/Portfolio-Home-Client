@@ -1,7 +1,7 @@
 const Services = ({ Services }) => {
   return (
     <div className="">
-      <h1>
+      <h1 className="titleTexts">
         Services <i className="fa-solid fa-gears"></i>
       </h1>
 
